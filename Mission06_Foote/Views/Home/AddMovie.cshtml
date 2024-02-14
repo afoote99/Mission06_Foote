@@ -1,0 +1,40 @@
+﻿@model MovieForm
+
+<div>
+    <h1>Add Movies to the watchlist!</h1>
+    <br /><br />
+    <form method="post">
+        <label for="category">Category:</label><br>
+        <input type="text" id="category" name="category" required asp-for="Category"><br><br>
+
+        <label for="title">Title:</label><br>
+        <input type="text" id="title" name="title" required asp-for="Title"><br><br>
+
+        <label for="year">Year:</label><br>
+        <input type="number" id="year" name="year" required asp-for="Year"><br><br>
+
+        <label for="director">Director:</label><br>
+        <input type="text" id="director" name="director" required asp-for="Director"><br><br>
+
+        <label for="rating">Rating:</label><br>
+        <select id="rating" name="rating" required asp-for="Rating">
+            <option value="G">G</option>
+            <option value="PG">PG</option>
+            <option value="PG-13">PG-13</option>
+            <option value="R">R</option>
+        </select><br><br>
+
+        <label for="edited">Edited:</label><br>
+        <input type="radio" id="edited" name="edited" value="True" asp-for="Edited"> True<br>
+        <input type="radio" id="edited" name="edited" value="False" > False<br><br>
+
+        <label for="lentTo">Lent To:</label><br>
+        <input type="text" id="lentTo" name="lentTo" asp-for="LentTo"><br><br>
+
+        <label for="notes">Notes:</label><br>
+        <textarea id="notes" name="notes" rows="2" cols="40" maxlength="25" asp-for="Notes"></textarea><br><br>
+
+        <input type="submit" value="Submit">
+    </form>
+</div>
+
