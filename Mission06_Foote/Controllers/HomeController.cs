@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Mission06_Foote.Models;
 using System.Diagnostics;
 
@@ -27,16 +28,80 @@ namespace Mission06_Foote.Controllers
         [HttpGet]
         public IActionResult AddMovie()
         {
-            return View();
+            ViewBag.Ratings = _context.Ratings
+                .OrderBy(x => x.RatingName).ToList();
+
+            return View(new MovieForm());
         }
 
         [HttpPost]
         public IActionResult AddMovie(MovieForm response)
         {
-            _context.MovieForms.Add(response); // add record to the database
+            if (ModelState.IsValid)
+            {
+                _context.MovieForms.Add(response); // add record to the database
+                _context.SaveChanges();
+
+                return View("Confirmation", response);
+            }
+            else
+            {
+                ViewBag.Ratings = _context.Ratings
+                    .OrderBy(x => x.RatingName).ToList();
+
+                return View(response);
+            }
+
+        }
+
+        public IActionResult MovieQueue()
+        {
+            var movies = _context.MovieForms
+                .OrderBy(x => x.Title).ToList();
+
+            return View(movies);
+        }
+
+        //setting the Edit IActionResult
+        public IActionResult Edit(int id)
+        {
+            var recordToEdit = _context.MovieForms
+                .Single(x => x.MovieId == id);
+
+            ViewBag.Ratings = _context.Ratings
+                .OrderBy(x => x.RatingName).ToList();
+
+            return View("AddMovie", recordToEdit);
+
+        }
+        [HttpPost]
+        public IActionResult Edit(MovieForm updatedInfo)
+        {
+            _context.Update(updatedInfo);
             _context.SaveChanges();
 
-            return View("Confirmation");
+            return RedirectToAction("MovieQueue");
+        }
+
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            var recordToDelete = _context.MovieForms
+                .Single(x => x.MovieId == id);
+
+            ViewBag.Ratings = _context.Ratings
+            .OrderBy(x => x.RatingName).ToList();
+
+            return View("Deletion", recordToDelete);
+        }
+
+        [HttpPost]
+        public IActionResult Delete(MovieForm deletedInfo)
+        {
+            _context.MovieForms.Remove(deletedInfo);
+            _context.SaveChanges();
+
+            return RedirectToAction("MovieQueue");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

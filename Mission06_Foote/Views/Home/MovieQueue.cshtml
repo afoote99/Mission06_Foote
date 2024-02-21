@@ -1,0 +1,37 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model List<MovieForm>
+
+<table class="table table-bordered">
+    <thead class="fw-bold">
+        <tr>
+            <td>Category</td>
+            <td>Title</td>
+            <td>Year</td>
+            <td>Director</td>
+            <td>Rating</td>
+        </tr>
+    </thead>
+
+    
+    @foreach (var movie in Model)
+    {
+        <tbody>
+            <tr>
+                <td>@movie.Category</td>
+                <td>@movie.Title</td>
+                <td>@movie.Year</td>
+                <td>@movie.Director</td>
+                <td>@movie.Rating</td>
+
+                <td> <a class="btn" asp-controller="Home" asp-action="Edit" asp-route-id="@movie.MovieId" ></a>Edit</td>
+                <td> <a class="btn" asp-controller="Home" asp-action="Delete" asp-route-id="@movie.MovieId"></a>Delete</td>
+            </tr>
+        </tbody>
+    }
+    
+</table>

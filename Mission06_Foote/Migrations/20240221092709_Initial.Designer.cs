@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Mission06_Foote.Models;
 
@@ -10,9 +11,11 @@ using Mission06_Foote.Models;
 namespace Mission06_Foote.Migrations
 {
     [DbContext(typeof(MovieAdditionContext))]
-    partial class MovieAdditionContextModelSnapshot : ModelSnapshot
+    [Migration("20240221092709_Initial")]
+    partial class Initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.2");
