@@ -57,7 +57,9 @@ namespace Mission06_Foote.Controllers
         public IActionResult MovieQueue()
         {
             var movies = _context.MovieForms
-                .OrderBy(c => c.Title).ToList();
+                .Include(m => m.Categories) // Eagerly load Categories with each MovieForm
+                .OrderBy(c => c.Title)
+                .ToList();
 
             return View(movies);
         }

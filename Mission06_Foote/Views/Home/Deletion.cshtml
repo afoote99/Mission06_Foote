@@ -2,15 +2,18 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
+    ViewData["Title"] = "Delete Movie";
 }
 @model MovieForm
 
-<h2>Confirm Deletion</h2>
-<br />
-<h3>@Model.Title</h3>
-<br />
-<form method="post">
-    <input type="hidden" asp-for="MovieId" />
-    <button type="submit">Delete</button>
-    <a class="btn" asp-controller="Home" asp-action="MovieQueue">Cancel</a>
-</form>
+<div class="container mt-5">
+    <div class="text-center">
+        <h2>Confirm Deletion</h2>
+        <p class="lead">Are you sure you want to delete <strong>@Model.Title</strong>?</p>
+        <form method="post" class="mt-4">
+            <input type="hidden" asp-for="MovieId" />
+            <button type="submit" class="btn btn-danger">Delete</button>
+            <a class="btn btn-secondary" asp-controller="Home" asp-action="MovieQueue">Cancel</a>
+        </form>
+    </div>
+</div>

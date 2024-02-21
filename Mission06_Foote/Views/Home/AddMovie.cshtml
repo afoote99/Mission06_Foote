@@ -1,4 +1,8 @@
-﻿@model MovieForm
+﻿@{
+    ViewData["Title"] = "Add Movie";
+}
+
+@model MovieForm
 
 <div class="container mt-5">
     <h1>Add Movies to the Watchlist!</h1>
@@ -33,7 +37,7 @@
 
         <div class="mb-3">
             <label for="rating" class="form-label">Rating:</label>
-            <select id="rating" name="rating" class="form-select">
+            <select asp-for="Rating" id="rating" name="rating" class="form-select">
                 <option value="">Select a Rating</option>
                 <option>G</option>
                 <option>PG</option>

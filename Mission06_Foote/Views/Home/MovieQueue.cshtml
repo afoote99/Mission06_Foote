@@ -2,6 +2,7 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
+    ViewData["Title"] = "Movie List";
 }
 
 @model List<MovieForm>
@@ -14,8 +15,11 @@
                 <td>Year</td>
                 <td>Director</td>
                 <td>Rating</td>
+                <td>Genre</td>
                 <td>Edited</td>
                 <td>CopiedToPlex</td>
+                <td>Lent To</td>
+                <td>Notes</td>
                 <td>Actions</td>
             </tr>
         </thead>
@@ -27,8 +31,11 @@
                     <td>@movie.Year</td>
                     <td>@movie.Director</td>
                     <td>@movie.Rating</td>
+                    <td>@movie.Categories?.CategoryName</td>
                     <td>@movie.Edited</td>
                     <td>@movie.CopiedToPlex</td>
+                    <td>@movie.LentTo</td>
+                    <td>@movie.Notes</td>
                     <td>
                         <a class="btn btn-outline-primary" asp-controller="Home" asp-action="Edit" asp-route-id="@movie.MovieId">Edit</a>
                         <a class="btn btn-outline-danger" asp-controller="Home" asp-action="Delete" asp-route-id="@movie.MovieId">Delete</a>
