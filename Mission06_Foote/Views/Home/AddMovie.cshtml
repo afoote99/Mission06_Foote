@@ -1,63 +1,91 @@
 ﻿@model MovieForm
 
-<div>
-    <h1>Add Movies to the watchlist!</h1>
-    <br /><br />
-    <form method="post">
+<div class="container mt-5">
+    <h1>Add Movies to the Watchlist!</h1>
+    <form method="post" class="mt-4">
         <input type="hidden" asp-for="MovieId" />
 
-        <select asp-for="CategoryId">
-            <option value="">Select a Category</option>
-            @foreach (Categories c in ViewBag.Categories)
-            {
-                <option value="@c.CategoryId">@c.CategoryName</option>
-            }
-        </select>
+        <div class="mb-3">
+            <label for="CategoryId" class="form-label">Category:</label>
+            <select asp-for="CategoryId" class="form-select">
+                <option value="">Select a Category</option>
+                @foreach (Categories c in ViewBag.Categories)
+                {
+                    <option value="@c.CategoryId">@c.CategoryName</option>
+                }
+            </select>
+        </div>
 
-        <label for="title">Title:</label><br>
-        <input type="text" id="title" name="title"  asp-for="Title"><br><br>
+        <div class="mb-3">
+            <label for="title" class="form-label">Title:</label>
+            <input type="text" id="title" name="title" asp-for="Title" class="form-control">
+        </div>
 
-        <label for="year">Year:</label><br>
-        <input type="number" id="year" name="year"  asp-for="Year"><br><br>
+        <div class="mb-3">
+            <label for="year" class="form-label">Year:</label>
+            <input type="number" id="year" name="year" asp-for="Year" class="form-control">
+        </div>
 
-        <label for="director">Director:</label><br>
-        <input type="text" id="director" name="director" asp-for="Director"><br><br>
+        <div class="mb-3">
+            <label for="director" class="form-label">Director:</label>
+            <input type="text" id="director" name="director" asp-for="Director" class="form-control">
+        </div>
 
-        <label for="rating">Rating:</label><br>
-        <select id="rating" name="rating">
-            <option value="">Select a Rating</option>
-            <option >G</option>
-            <option >PG</option>
-            <option >PG-13</option>
-            <option>R</option>
-            <option >TV-Y</option>
-            <option>TV-Y7</option>
-            <option>TV-Y7FV</option>
-            <option>TV-G</option>
-            <option>TV-PG</option>
-            <option>TV-14</option>
-            <option>TV-MA</option>
-            <option>UR</option>
-            <option>NR</option>
-        </select><br><br>
+        <div class="mb-3">
+            <label for="rating" class="form-label">Rating:</label>
+            <select id="rating" name="rating" class="form-select">
+                <option value="">Select a Rating</option>
+                <option>G</option>
+                <option>PG</option>
+                <option>PG-13</option>
+                <option>R</option>
+                <option>TV-Y</option>
+                <option>TV-Y7</option>
+                <option>TV-Y7FV</option>
+                <option>TV-G</option>
+                <option>TV-PG</option>
+                <option>TV-14</option>
+                <option>TV-MA</option>
+                <option>UR</option>
+                <option>NR</option>
+            </select>
+        </div>
 
-        <label for="edited">Edited:</label><br>
-        <input type="radio" id="edited" name="edited" value="True" asp-for="Edited"> True<br>
-        <input type="radio" id="edited" name="edited" value="False" > False<br><br>
+        <fieldset class="mb-3">
+            <legend class="col-form-label pt-0">Edited:</legend>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" id="editedTrue" name="edited" value="True" asp-for="Edited">
+                <label class="form-check-label" for="editedTrue">True</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" id="editedFalse" name="edited" value="False" asp-for="Edited">
+                <label class="form-check-label" for="editedFalse">False</label>
+            </div>
+        </fieldset>
 
-        <label for="lentTo">Lent To:</label><br>
-        <input type="text" id="lentTo" name="lentTo" asp-for="LentTo"><br><br>
+        <div class="mb-3">
+            <label for="lentTo" class="form-label">Lent To:</label>
+            <input type="text" id="lentTo" name="lentTo" asp-for="LentTo" class="form-control">
+        </div>
 
-        <label for="CopiedToPlex">CopiedToPlex:</label><br>
-        <input type="radio" id="CopiedToPlex" name="CopiedToPlex" value="True" asp-for="CopiedToPlex"> True<br>
-        <input type="radio" id="CopiedToPlex" name="CopiedToPlex" value="False"> False<br><br>
+        <fieldset class="mb-3">
+            <legend class="col-form-label pt-0">Copied To Plex:</legend>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" id="CopiedToPlexTrue" name="CopiedToPlex" value="True" asp-for="CopiedToPlex">
+                <label class="form-check-label" for="CopiedToPlexTrue">True</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" id="CopiedToPlexFalse" name="CopiedToPlex" value="False" asp-for="CopiedToPlex">
+                <label class="form-check-label" for="CopiedToPlexFalse">False</label>
+            </div>
+        </fieldset>
 
-        <label for="notes">Notes:</label><br>
-        <textarea id="notes" name="notes" rows="2" cols="40" maxlength="25" asp-for="Notes"></textarea><br><br>
+        <div class="mb-3">
+            <label for="notes" class="form-label">Notes:</label>
+            <textarea id="notes" name="notes" rows="2" cols="40" maxlength="25" asp-for="Notes" class="form-control"></textarea>
+        </div>
 
-        <button type="submit">Submit Movie</button>
-
-        <div asp-validation-summary="All"></div>
+        <button type="submit" class="btn btn-primary">Submit Movie</button>
+        <div asp-validation-summary="All" class="text-danger"></div>
     </form>
 </div>
-
