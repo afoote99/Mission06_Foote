@@ -6,8 +6,13 @@
     <form method="post">
         <input type="hidden" asp-for="MovieId" />
 
-        <label for="category">Category:</label><br>
-        <input type="text" id="category" name="category"  asp-for="Category"><br><br>
+        <select asp-for="CategoryId">
+            <option value="">Select a Category</option>
+            @foreach (Categories c in ViewBag.Categories)
+            {
+                <option value="@c.CategoryId">@c.CategoryName</option>
+            }
+        </select>
 
         <label for="title">Title:</label><br>
         <input type="text" id="title" name="title"  asp-for="Title"><br><br>
@@ -18,14 +23,23 @@
         <label for="director">Director:</label><br>
         <input type="text" id="director" name="director" asp-for="Director"><br><br>
 
-        <select asp-for="RatingId">
-            <option value ="">Select a Rating</option>
-            @foreach (Rating r in ViewBag.Ratings)
-            {
-                <option value="@r.RatingId">@r.RatingName</option>
-            }
-        </select>
-        <br /><br />
+        <label for="rating">Rating:</label><br>
+        <select id="rating" name="rating">
+            <option value="">Select a Rating</option>
+            <option >G</option>
+            <option >PG</option>
+            <option >PG-13</option>
+            <option>R</option>
+            <option >TV-Y</option>
+            <option>TV-Y7</option>
+            <option>TV-Y7FV</option>
+            <option>TV-G</option>
+            <option>TV-PG</option>
+            <option>TV-14</option>
+            <option>TV-MA</option>
+            <option>UR</option>
+            <option>NR</option>
+        </select><br><br>
 
         <label for="edited">Edited:</label><br>
         <input type="radio" id="edited" name="edited" value="True" asp-for="Edited"> True<br>
@@ -33,6 +47,10 @@
 
         <label for="lentTo">Lent To:</label><br>
         <input type="text" id="lentTo" name="lentTo" asp-for="LentTo"><br><br>
+
+        <label for="CopiedToPlex">CopiedToPlex:</label><br>
+        <input type="radio" id="CopiedToPlex" name="CopiedToPlex" value="True" asp-for="CopiedToPlex"> True<br>
+        <input type="radio" id="CopiedToPlex" name="CopiedToPlex" value="False"> False<br><br>
 
         <label for="notes">Notes:</label><br>
         <textarea id="notes" name="notes" rows="2" cols="40" maxlength="25" asp-for="Notes"></textarea><br><br>

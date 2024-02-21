@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Mission06_Foote.Models
@@ -8,21 +9,25 @@ namespace Mission06_Foote.Models
         [Key]
         [Required]
         public int MovieId { get; set; }
-        [Required(ErrorMessage = "Sorry, you need to enter a category")]
-        public string Category { get; set; }
+
+        [ForeignKey("Categories")]
+        public int? CategoryId { get; set; }
+        public Categories? Categories { get; set; }
         [Required]
         public string Title { get; set; }
-        [Range(1880, 2024)]
-        public int Year { get; set; } = 0;
         [Required]
-        public string Director { get; set; }
+        [Range(1888, 100000)]
+        public int Year { get; set; } = 0;
 
-        [ForeignKey("RatingId")]
-        public int? RatingId { get; set; }
+        public string? Director { get; set; }
 
-        public Rating? Rating { get; set; }
+        public string? Rating { get; set; }
+        [Required]
         public bool? Edited { get; set; }
+
         public string? LentTo { get; set; }
+        [Required]
+        public bool? CopiedToPlex { get; set; }
 
         [MaxLength(25)]
         public string? Notes { get; set; }

@@ -28,8 +28,8 @@ namespace Mission06_Foote.Controllers
         [HttpGet]
         public IActionResult AddMovie()
         {
-            ViewBag.Ratings = _context.Ratings
-                .OrderBy(x => x.RatingName).ToList();
+            ViewBag.Categories = _context.Categories
+                .OrderBy(c => c.CategoryName).ToList();
 
             return View(new MovieForm());
         }
@@ -46,8 +46,8 @@ namespace Mission06_Foote.Controllers
             }
             else
             {
-                ViewBag.Ratings = _context.Ratings
-                    .OrderBy(x => x.RatingName).ToList();
+                ViewBag.Categories = _context.Categories
+                    .OrderBy(c => c.CategoryName).ToList();
 
                 return View(response);
             }
@@ -57,7 +57,7 @@ namespace Mission06_Foote.Controllers
         public IActionResult MovieQueue()
         {
             var movies = _context.MovieForms
-                .OrderBy(x => x.Title).ToList();
+                .OrderBy(c => c.Title).ToList();
 
             return View(movies);
         }
@@ -66,10 +66,10 @@ namespace Mission06_Foote.Controllers
         public IActionResult Edit(int id)
         {
             var recordToEdit = _context.MovieForms
-                .Single(x => x.MovieId == id);
+                .Single(c => c.MovieId == id);
 
-            ViewBag.Ratings = _context.Ratings
-                .OrderBy(x => x.RatingName).ToList();
+            ViewBag.Categories = _context.Categories
+                .OrderBy(c => c.CategoryName).ToList();
 
             return View("AddMovie", recordToEdit);
 
@@ -87,10 +87,10 @@ namespace Mission06_Foote.Controllers
         public IActionResult Delete(int id)
         {
             var recordToDelete = _context.MovieForms
-                .Single(x => x.MovieId == id);
+                .Single(c => c.MovieId == id);
 
-            ViewBag.Ratings = _context.Ratings
-            .OrderBy(x => x.RatingName).ToList();
+            ViewBag.Categories = _context.Categories
+            .OrderBy(c => c.CategoryName).ToList();
 
             return View("Deletion", recordToDelete);
         }
