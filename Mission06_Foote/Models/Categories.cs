@@ -2,6 +2,7 @@
 
 namespace Mission06_Foote.Models
 {
+    //setting up foreign key table for Categories
     public class Categories
     {
         [Key]

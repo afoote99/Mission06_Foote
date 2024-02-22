@@ -7,7 +7,7 @@ namespace Mission06_Foote.Controllers
 {
     public class HomeController : Controller
     {
-
+        //Loading data into context
         private MovieAdditionContext _context;
 
         public HomeController(MovieAdditionContext temp) //constructor
@@ -15,28 +15,34 @@ namespace Mission06_Foote.Controllers
             _context = temp;
         }
 
+        //What to do when Index page is accessed 
         public IActionResult Index()
         {
             return View();
         }
 
+        //what to do when GetToKnow page is accessed 
         public IActionResult GetToKnow()
         {
             return View();
         }
 
+        //Get moethod for when someone goes to the AddMovie page
         [HttpGet]
         public IActionResult AddMovie()
         {
+            //Load the categories into a viewbag for easy access
             ViewBag.Categories = _context.Categories
                 .OrderBy(c => c.CategoryName).ToList();
 
             return View(new MovieForm());
         }
 
+        //Post method for adding a movie
         [HttpPost]
         public IActionResult AddMovie(MovieForm response)
         {
+            //if all the entries are valid, run smoothly
             if (ModelState.IsValid)
             {
                 _context.MovieForms.Add(response); // add record to the database
@@ -44,7 +50,7 @@ namespace Mission06_Foote.Controllers
 
                 return View("Confirmation", response);
             }
-            else
+            else // reload page with already filled out info
             {
                 ViewBag.Categories = _context.Categories
                     .OrderBy(c => c.CategoryName).ToList();
@@ -54,6 +60,7 @@ namespace Mission06_Foote.Controllers
 
         }
 
+        //what to run when someone is trying to look at the Movie list
         public IActionResult MovieQueue()
         {
             var movies = _context.MovieForms
@@ -64,18 +71,22 @@ namespace Mission06_Foote.Controllers
             return View(movies);
         }
 
-        //setting the Edit IActionResult
+        //What to do when editing records
         public IActionResult Edit(int id)
         {
+            //grabs the right record based on ID to edit
             var recordToEdit = _context.MovieForms
                 .Single(c => c.MovieId == id);
 
+            //uses viewbag to access category info
             ViewBag.Categories = _context.Categories
                 .OrderBy(c => c.CategoryName).ToList();
 
             return View("AddMovie", recordToEdit);
 
         }
+
+        //Post the changes and save them
         [HttpPost]
         public IActionResult Edit(MovieForm updatedInfo)
         {
@@ -85,6 +96,7 @@ namespace Mission06_Foote.Controllers
             return RedirectToAction("MovieQueue");
         }
 
+        //similar to what we did for the dit, but now it's just for delete
         [HttpGet]
         public IActionResult Delete(int id)
         {

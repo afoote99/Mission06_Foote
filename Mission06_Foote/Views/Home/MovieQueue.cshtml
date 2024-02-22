@@ -7,10 +7,12 @@
 
 @model List<MovieForm>
 
+    @*This is where we display the movie table*@
+
 <div class="table-responsive">
     <table class="table table-bordered table-striped table-hover">
         <thead class="fw-bold">
-            <tr>
+            <tr> @*Headers*@
                 <td>Title</td>
                 <td>Year</td>
                 <td>Director</td>
@@ -26,7 +28,7 @@
         @foreach (var movie in Model)
         {
             <tbody>
-                <tr>
+                <tr> @*Dynamically fill in the cells for each user*@
                     <td>@movie.Title</td>
                     <td>@movie.Year</td>
                     <td>@movie.Director</td>
@@ -36,7 +38,7 @@
                     <td>@movie.CopiedToPlex</td>
                     <td>@movie.LentTo</td>
                     <td>@movie.Notes</td>
-                    <td>
+                    <td> @*These throw in Edit and Delete buttons that take you to applicable views*@
                         <a class="btn btn-outline-primary" asp-controller="Home" asp-action="Edit" asp-route-id="@movie.MovieId">Edit</a>
                         <a class="btn btn-outline-danger" asp-controller="Home" asp-action="Delete" asp-route-id="@movie.MovieId">Delete</a>
                     </td>

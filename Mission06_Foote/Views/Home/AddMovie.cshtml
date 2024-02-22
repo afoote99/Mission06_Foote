@@ -4,11 +4,15 @@
 
 @model MovieForm
 
+@* Page where user can add a movie, contains a form the users can fill out, bunch of cs to make it look nice a perty
+    Each value is tied to the specific user so the values stay the same when the form is being edited or reloaded after invalid submission
+*@
 <div class="container mt-5">
     <h1>Add Movies to the Watchlist!</h1>
     <form method="post" class="mt-4">
         <input type="hidden" asp-for="MovieId" />
 
+        @*Dynamically grab the category values from the Categories table*@
         <div class="mb-3">
             <label for="CategoryId" class="form-label">Category:</label>
             <select asp-for="CategoryId" class="form-select">
@@ -20,21 +24,25 @@
             </select>
         </div>
 
+        @*Title*@
         <div class="mb-3">
             <label for="title" class="form-label">Title:</label>
             <input type="text" id="title" name="title" asp-for="Title" class="form-control">
         </div>
 
+        @*Year*@
         <div class="mb-3">
             <label for="year" class="form-label">Year:</label>
             <input type="number" id="year" name="year" asp-for="Year" class="form-control">
         </div>
 
+        @*Director*@
         <div class="mb-3">
             <label for="director" class="form-label">Director:</label>
             <input type="text" id="director" name="director" asp-for="Director" class="form-control">
         </div>
 
+        @*Option list for ratings*@
         <div class="mb-3">
             <label for="rating" class="form-label">Rating:</label>
             <select asp-for="Rating" id="rating" name="rating" class="form-select">
@@ -55,6 +63,7 @@
             </select>
         </div>
 
+        @*Edited*@
         <fieldset class="mb-3">
             <legend class="col-form-label pt-0">Edited:</legend>
             <div class="form-check">
@@ -67,11 +76,13 @@
             </div>
         </fieldset>
 
+        @*Lent To*@
         <div class="mb-3">
             <label for="lentTo" class="form-label">Lent To:</label>
             <input type="text" id="lentTo" name="lentTo" asp-for="LentTo" class="form-control">
         </div>
 
+        @*Copied to Plex boolean*@
         <fieldset class="mb-3">
             <legend class="col-form-label pt-0">Copied To Plex:</legend>
             <div class="form-check">
@@ -84,12 +95,15 @@
             </div>
         </fieldset>
 
+        @*Notes*@
         <div class="mb-3">
             <label for="notes" class="form-label">Notes:</label>
             <textarea id="notes" name="notes" rows="2" cols="40" maxlength="25" asp-for="Notes" class="form-control"></textarea>
         </div>
 
+        @*Submit button*@
         <button type="submit" class="btn btn-primary">Submit Movie</button>
+        @*Allows for custome error messages*@
         <div asp-validation-summary="All" class="text-danger"></div>
     </form>
 </div>

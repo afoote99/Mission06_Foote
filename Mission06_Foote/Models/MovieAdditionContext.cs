@@ -2,6 +2,7 @@
 
 namespace Mission06_Foote.Models
 {
+    //this is our DbContext
     public class MovieAdditionContext : DbContext
     {
         public MovieAdditionContext(DbContextOptions<MovieAdditionContext> options) : base(options)
@@ -13,8 +14,10 @@ namespace Mission06_Foote.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            //instead of changing MovieForm to Movies, just anytimme MovieForm is mentioned associate with Movies
             modelBuilder.Entity<MovieForm>().ToTable("Movies");
 
+            //seeding the data for categories
             modelBuilder.Entity<Categories>().HasData(
                 new Categories { CategoryId = 1, CategoryName = "Miscellaneous" },
                 new Categories { CategoryId = 2, CategoryName = "Drama" },
